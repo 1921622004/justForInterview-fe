@@ -1,0 +1,14 @@
+.app-nav{
+  background-color: #3f51b5;
+  height: 50px;
+  .nav-wrapper{
+    display: flex;
+    align-items: center;
+    width: 1180px;
+    margin: 0 auto;
+    .logo-placeholder{
+      color: #fff;
+      line-height: 50px;
+    }
+  }
+}
