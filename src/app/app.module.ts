@@ -1,31 +1,30 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { FlexLayoutModule } from "@angular/flex-layout";
+
+import { AppComponent } from './app.component';
 import { routes } from './routes';
-import { HeaderComponent } from './shared/header/header.component';
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { TagDetailComponent } from './pages/tag-detail/tag-detail.component';
-import { QuestionDetailComponent } from './pages/question-detail/question-detail.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { UserService } from './shared/service/user.service';
+import { HomeComponent } from './pages/home/home.component';
+import { SharedModule } from './shared/share.module';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    TagDetailComponent,
-    QuestionDetailComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    SharedModule,
+    FlexLayoutModule
   ],
-  providers: [],
+  providers: [{provide: UserService, useClass: UserService}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

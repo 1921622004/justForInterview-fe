@@ -1,1 +1,8 @@
-<p>home works!</p>
+<div class="tags-container padding8" fxLayout="row" fxLayoutAlign="space-between center">
+  <ul class="tag-list" fxLayout="row">
+    <li *ngFor="let tag of tags">
+      <a title="tag.tagName" mat-button [routerLink]="['/tag', tag.tagCode]">{{tag.tagName}}</a>
+    </li>
+  </ul>
+  <button mat-button>标签管理</button>
+</div>
