@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ITag } from 'src/app/shared/interfaces/tag';
+import { ITagModel } from 'src/app/shared/interfaces/tag';
+import { IQuestionModel } from 'src/app/shared/interfaces/question';
 
 @Component({
   selector: 'app-home',
@@ -8,17 +9,35 @@ import { ITag } from 'src/app/shared/interfaces/tag';
 })
 export class HomeComponent implements OnInit {
 
-  public tags: ITag[] = [];
+  public tags: ITagModel[] = [];
+  public questions: IQuestionModel[] = [];
 
-  constructor() { 
+  constructor() {
     this.tags = [{
       tagCode: 'java',
       tagName: 'JAVA',
       createTime: '2019-02-10'
-    },{
+    }, {
       tagCode: 'js',
       tagName: 'JAVASCRIPT',
       createTime: '2019-02-10'
+    }];
+    this.questions = [{
+      title: 'string',
+      content: 'string',
+      originalContent: 'string',
+      questionId: 'string',
+      createdTime: 'string',
+      answerCount: 10,
+      collectCount: 0,
+    }, {
+      title: 'string',
+      content: 'string',
+      originalContent: 'string',
+      questionId: 'string',
+      createdTime: 'string',
+      answerCount: 0,
+      collectCount: 12,
     }]
   }
 

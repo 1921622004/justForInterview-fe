@@ -1,1 +1,12 @@
-<p>question-list works!</p>
+<ul class="question-list container" >
+  <li class="question-item padding8" *ngFor="let question of questions">
+    <a [routerLink]="[ '/question', question.questionId ]" class="question-wrapper">
+      <p class="question-title">{{question.title}}</p>
+      <p class="question-content">{{question.content}}</p>
+      <div fxLayout="row" class="question-status">
+        <span class="question-answer-count"></span>
+        <span class="question-collect-count" *ngIf="question.collectCount > 0">收藏 {{question.collectCount}}</span>
+      </div>
+    </a>
+  </li>
+</ul>

@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { IQuestionModel } from '../../interfaces/question';
 
 @Component({
   selector: 'app-question-list',
   templateUrl: './question-list.component.html',
-  styleUrls: ['./question-list.component.css']
+  styleUrls: ['./question-list.component.scss']
 })
 export class QuestionListComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  public ngOnInit() {
+    console.log(this);
+    
   }
+
+  @Input()
+  public questions: IQuestionModel[];
 
 }

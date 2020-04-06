@@ -1,4 +1,4 @@
-export interface ITag {
+export interface ITagModel {
   tagName: string;
   tagCode: string;
   createTime: string;

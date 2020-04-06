@@ -1,0 +1,18 @@
+.question-item{
+  margin: 8px auto;
+  border: 1px solid #eee;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
+  .question-wrapper{
+    display: block;
+  }
+  .question-title{
+    font-size: 18px;
+    line-height: 26px;
+  }
+  .question-content{
+    background-color: #fafafa;
+    padding: 12px;
+  }
+}

@@ -1,3 +1,16 @@
-<p>login works!</p>
-<button mat-button>text</button>
-222222
+<div class="container">
+  <form [formGroup]="userForm">
+    <mat-form-field>
+      <input matInput placeholder="用户名" required formControlName="userName">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="邮箱" formControlName="email">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="密码" required formControlName="password">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="确认密码" required formControlName="password">
+    </mat-form-field>
+  </form>
+</div>
