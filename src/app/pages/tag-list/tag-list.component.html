@@ -1,5 +1,24 @@
-<div class="container">
-  <div class="tags-container">
-    
-  </div>
+<div class="tags-container container">
+  <mat-tab-group>
+    <mat-tab [label]="tag.tagName" *ngFor="let tag of tags">
+      <div class="chip-container" fxLayout="row wrap" fxLayoutAlign="space-between space-between" fxLayoutAlign="start center">
+        <div *ngFor="let childTag of tag.children" fxFlex="0 0 25%" style="padding: 0 12px">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>{{childTag.tagName}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              {{childTag.tagDescription}}
+            </mat-card-content>
+            <mat-card-actions>
+              <a [routerLink]="['tag', childTag.tagCode]" mat-button>查看详情</a>
+              <button mat-button>关注</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+        
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <app-question-list ></app-question-list>
 </div>

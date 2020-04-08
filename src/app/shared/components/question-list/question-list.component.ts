@@ -9,11 +9,12 @@ import { IQuestionModel } from '../../interfaces/question';
 export class QuestionListComponent implements OnInit {
 
   public ngOnInit() {
-    console.log(this);
-    
   }
 
   @Input()
   public questions: IQuestionModel[];
+
+  @Input()
+  public showTags: boolean;
 
 }

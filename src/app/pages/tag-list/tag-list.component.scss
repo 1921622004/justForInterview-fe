@@ -4,4 +4,14 @@
   .tag-item{
     margin: 0 4px 4px 0;
   }
+  .chip-container{
+    overflow: hidden;
+    padding: 12px;
+  }
+  .mat-chip{
+    cursor: pointer;
+  }
+  .mat-card{
+    margin-bottom: 12px;
+  }
 }
