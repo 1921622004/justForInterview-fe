@@ -3,10 +3,11 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { TagDetailComponent } from './pages/tag-detail/tag-detail.component';
 import { TagListComponent } from './pages/tag-list/tag-list.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 export const routes: Routes = [
   {
-    path: '', 
+    path: '',
     redirectTo: 'feed',
     pathMatch: 'full'
   },
@@ -25,5 +26,9 @@ export const routes: Routes = [
   {
     path: 'tags',
     component: TagListComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   }
 ]

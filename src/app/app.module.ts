@@ -14,6 +14,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { SharedModule } from './shared/share.module';
 import { LoginComponent } from './pages/login/login.component';
 import { TagListComponent } from './pages/tag-list/tag-list.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { TagListComponent } from './pages/tag-list/tag-list.component';
     AppComponent,
     HomeComponent,
     LoginComponent,
-    TagListComponent
+    TagListComponent,
+    RegisterComponent
   ],
   imports: [
     SharedModule,
@@ -35,7 +37,7 @@ import { TagListComponent } from './pages/tag-list/tag-list.component';
     HttpClientJsonpModule
   ],
   providers: [
-    {provide: UserService, useClass: UserService}
+    { provide: UserService, useClass: UserService }
   ],
   bootstrap: [AppComponent]
 })

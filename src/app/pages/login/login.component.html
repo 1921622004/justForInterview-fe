@@ -1,7 +1,8 @@
-<div class="container">
-  <form [formGroup]="userForm">
+<div class="register-container">
+  <form [formGroup]="userForm" (submit)="submitHandler()">
     <mat-form-field>
-      <input matInput placeholder="用户名" required formControlName="userName">
+      <input matInput placeholder="用户名" required formControlName="username">
+      <mat-error *ngIf="userForm.get('username').invalid">{{getUserErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
       <input matInput placeholder="邮箱" formControlName="email">
@@ -12,5 +13,9 @@
     <mat-form-field>
       <input matInput placeholder="确认密码" required formControlName="password">
     </mat-form-field>
+    <button mat-raised-button color="primary" (click)="submitHandler()">注册</button>
   </form>
+  <p class="register-link">
+    还没有账号？去<a [routerLink]="['/register']" style="color: #673ab7;">注册</a>
+  </p>
 </div>
