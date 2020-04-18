@@ -1,5 +1,5 @@
 <div class="register-container">
-  <form [formGroup]="userForm" (submit)="submitHandler()">
+  <form [formGroup]="userForm">
     <mat-form-field>
       <mat-label>用户名</mat-label>
       <input matInput placeholder="用户名长度为6-20" required formControlName="username">

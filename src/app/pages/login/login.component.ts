@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, ValidatorFn, FormGroup, ValidationErrors } from "@angular/forms";
+import { HttpClient } from '@angular/common/http';
+import { IResponseBody } from 'src/app/shared/interfaces/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 const passwordValidator: ValidatorFn = (userForm: FormGroup): ValidationErrors => {
   const password = userForm.get('password');
@@ -18,32 +21,29 @@ export class LoginComponent implements OnInit {
 
   public userForm = this.fb.group({
     username: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
-    email: ['', Validators.email],
-    password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
-    confirmPassword: ['']
+    password: ['', Validators.required],
   }, {
     validators: passwordValidator
   })
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
   }
 
   public submitHandler() {
-
+    this.http.post<IResponseBody<string>>('/api/user/login', this.userForm.value).subscribe((res) => {
+      if (res && res.success) {
+        this.snackBar.open('欢迎', null, { verticalPosition: 'top', duration: 2000 });
+        localStorage.setItem('jwt-token', res.data);
+      } else {
+        this.snackBar.open('登录失败，请重试', null, { verticalPosition: 'top', duration: 2000 });
+      }
+    })
   }
-
-  public getUserErrorMessage() {
-    let userNameControl = this.userForm.get('username');
-    if (userNameControl.hasError('required')) {
-      return '用户名不可为空'
-    } else if (userNameControl.hasError('minlength')) {
-      return '用户名过短'
-    } else if (userNameControl.hasError('maxlength')) {
-      return '用户名过长'
-    } else return '';
-  }
-
 
 }
