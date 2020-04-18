@@ -5,6 +5,7 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { MatCardModule } from "@angular/material/card";
     MatInputModule,
     MatFormFieldModule,
     MatTabsModule,
-    MatCardModule
+    MatCardModule,
+    MatSnackBarModule
   ],
   exports: [
     MatChipsModule,
@@ -21,7 +23,8 @@ import { MatCardModule } from "@angular/material/card";
     MatInputModule,
     MatFormFieldModule,
     MatTabsModule,
-    MatCardModule
+    MatCardModule,
+    MatSnackBarModule
   ]
 })
-export class MaterialModule {}
+export class MaterialModule { }

@@ -4,9 +4,9 @@ import { FormBuilder, Validators, ValidatorFn, FormGroup, ValidationErrors } fro
 const passwordValidator: ValidatorFn = (userForm: FormGroup): ValidationErrors => {
   const password = userForm.get('password');
   const confirmPassword = userForm.get('confirmPassword');
-  if (password.value !== confirmPassword.value) {
-    return { confirmPassword: '与密码不一致' }
-  }
+  if (password?.value && confirmPassword?.value && password.value !== confirmPassword.value) {
+    return { equal: true }
+  } else return null
 }
 
 @Component({
@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   public submitHandler() {
+
   }
 
   public getUserErrorMessage() {
@@ -43,5 +44,6 @@ export class LoginComponent implements OnInit {
       return '用户名过长'
     } else return '';
   }
+
 
 }
