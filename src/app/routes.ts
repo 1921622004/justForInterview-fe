@@ -4,6 +4,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { TagDetailComponent } from './pages/tag-detail/tag-detail.component';
 import { TagListComponent } from './pages/tag-list/tag-list.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { NewQuestionComponent } from './pages/new-question/new-question.component';
 
 export const routes: Routes = [
   {
@@ -30,5 +31,9 @@ export const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'ask',
+    component: NewQuestionComponent
   }
 ]
