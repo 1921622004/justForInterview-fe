@@ -41,9 +41,10 @@ export class RegisterComponent implements OnInit {
 
   public submitHandler() {
     const { username, password, email } = this.userForm.value;
-    this.http.post<IResponseBody<string>>('/api/', { username, password, email }).subscribe((res) => {
+    this.http.post<IResponseBody<string>>('/api/user/register', { username, password, email }).subscribe((res) => {
       if (res && res.success) {
         localStorage.setItem('jwt-token', res.data);
+        this.snackBar.open('注册成功', null, { verticalPosition: 'top', duration: 2000 });
         this.router.navigate(['/login']);
       } else {
         this.snackBar.open(res ? res.message : '登录失败，请重试', null, {
