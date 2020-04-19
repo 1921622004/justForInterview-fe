@@ -39,7 +39,7 @@ import { NewQuestionComponent } from './pages/new-question/new-question.componen
     HttpClientJsonpModule
   ],
   providers: [
-    { provide: UserService, useClass: UserService }
+    UserService
   ],
   bootstrap: [AppComponent]
 })

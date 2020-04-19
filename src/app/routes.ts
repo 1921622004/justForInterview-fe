@@ -5,6 +5,7 @@ import { TagDetailComponent } from './pages/tag-detail/tag-detail.component';
 import { TagListComponent } from './pages/tag-list/tag-list.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { NewQuestionComponent } from './pages/new-question/new-question.component';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -34,6 +35,7 @@ export const routes: Routes = [
   },
   {
     path: 'ask',
-    component: NewQuestionComponent
+    component: NewQuestionComponent,
+    canActivate: [AuthGuard]
   }
 ]

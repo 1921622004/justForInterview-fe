@@ -3,6 +3,8 @@ import { FormBuilder, Validators, ValidatorFn, FormGroup, ValidationErrors } fro
 import { HttpClient } from '@angular/common/http';
 import { IResponseBody } from 'src/app/shared/interfaces/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from 'src/app/shared/service/user.service';
+import { Router } from '@angular/router';
 
 const passwordValidator: ValidatorFn = (userForm: FormGroup): ValidationErrors => {
   const password = userForm.get('password');
@@ -29,7 +31,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -39,7 +43,8 @@ export class LoginComponent implements OnInit {
     this.http.post<IResponseBody<string>>('/api/user/login', this.userForm.value).subscribe((res) => {
       if (res && res.success) {
         this.snackBar.open('欢迎', null, { verticalPosition: 'top', duration: 2000 });
-        localStorage.setItem('jwt-token', res.data);
+        this.userService.token = res.data;
+        this.router.navigate(['/home']);
       } else {
         this.snackBar.open('登录失败，请重试', null, { verticalPosition: 'top', duration: 2000 });
       }

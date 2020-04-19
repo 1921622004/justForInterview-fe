@@ -1,1 +1,18 @@
-<p>new-question works!</p>
+<div class="question-container container">
+  <p class="question-head">描述您所遇到的面试题</p>
+  <form [formGroup]="questionForm">
+    <mat-form-field>
+      <mat-label>标题</mat-label>
+      <input matInput placeholder="写下您所遇到的面试题" formControlName="title" required>
+      <mat-error *ngIf="questionForm.hasError('maxlength', 'title')">
+        标题过长
+      </mat-error>
+      <mat-error *ngIf="questionForm.hasError('required', 'title')">
+        标题不可为空
+      </mat-error>
+    </mat-form-field>
+    <div id="content-editor"></div>
+    <mat-error *ngIf="questionForm.hasError('required', 'content')">描述不可为空</mat-error>
+  </form>
+  <button mat-raised-button (click)="openTagEdit()">提交</button>
+</div>
