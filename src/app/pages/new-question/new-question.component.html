@@ -11,8 +11,7 @@
         标题不可为空
       </mat-error>
     </mat-form-field>
-    <div id="content-editor"></div>
-    <mat-error *ngIf="questionForm.hasError('required', 'content')">描述不可为空</mat-error>
   </form>
+  <div id="content-editor"></div>
   <button mat-raised-button (click)="openTagEdit()">提交</button>
 </div>

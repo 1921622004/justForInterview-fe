@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>选择标签</h1>
+<div mat-dialog-content>
+  <mat-tab-group (selectedIndexChange)="tabChangeHandler($event)">
+    <mat-tab *ngFor="let tag of tagService.tags" [label]="tag.tagName">
+      <ng-template matTabContent>
+        <mat-chip-list>
+          <mat-chip *ngFor="let item of tag.children">{{item.tagName}}</mat-chip>
+        </mat-chip-list>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="primary">确定</button>
+  <button mat-raised-button>取消</button>
+</div>

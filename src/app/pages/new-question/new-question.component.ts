@@ -1,9 +1,10 @@
-import { Component, OnInit, ContentChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from '@angular/material/snack-bar';
-import "quill/dist/quill.core.css";
-import 'quill/dist/quill.snow.css';
+import { TagService } from 'src/app/shared/service/tag.service';
+import { ITagModel } from 'src/app/shared/interfaces/tag';
 
 @Component({
   selector: 'app-new-question',
@@ -26,46 +27,61 @@ export class NewQuestionComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private snackBar: MatSnackBar,
-    private el: ElementRef<HTMLDivElement>
+    private el: ElementRef<HTMLDivElement>,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
   }
 
   ngAfterContentInit(): void {
-    import('quill').then(module => {
-      const Quill = module.default;
-      this.editor = new Quill('#content-editor', {
-        modules: {
-          toolbar: [
-            [{ header: [1, 2, false] }],
-            ['bold', 'link'],
-            ['image', 'code-block', { list: 'ordered' }, { list: 'bullet' }]
-          ]
-        },
-        placeholder: '详细描述您所遇到的问题',
-        theme: 'snow'  // or 'bubble'
-      });
-      this.editor.on('text-change', (delta, ...args) => {
-        console.log(this.editor.getText());
-        console.log(this.editor.getContents());
-
-      });
-      this.editor.on('selection-change', (range, oldRange, ) => {
-        const contentControl = this.questionForm.get('content');
-        if (range) {
-          contentControl.setErrors(null);
-        } else {
-          if (!contentControl.value) {
-            contentControl.setErrors({ required: true });
+    import('@toast-ui/editor').then(module => {
+      const Editor = module.default;
+      this.editor = new Editor({
+        el: this.el.nativeElement.querySelector('#content-editor'),
+        height: '600px',
+        initialEditType: 'markdown',
+        hideModeSwitch: true,
+        placeholder: '详细描述您遇到的面试题',
+        previewStyle: 'vertical',
+        events: {
+          blur: () => {
+            if (!this.editor.getHtml()) {
+              this.questionForm.get('content').setErrors({ required: true });
+            } else {
+              this.questionForm.get('content').setErrors(null);
+            }
+          },
+          change: () => {
+            this.questionForm.patchValue({
+              content: this.editor.getHtml(),
+              rawContent: this.editor.getMarkdown(),
+            })
           }
         }
-      })
+        // previewStyle: 'vertical'
+      });
     })
   }
 
   public openTagEdit(): void {
-
+    const tagDialogRef = this.dialog.open(TagDialog, {
+      width: '600px'
+    });
   }
 
+}
+
+@Component({
+  selector: 'tag-dialog',
+  templateUrl: './tag-dialog.html'
+})
+export class TagDialog {
+  constructor(
+    private tagService: TagService
+  ) { }
+
+  public tabChangeHandler(index: number): void {
+    this.tagService.getTagsByParentCode(this.tagService.tags[index].tagCode);
+  }
 }

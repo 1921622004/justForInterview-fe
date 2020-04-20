@@ -16,6 +16,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { TagListComponent } from './pages/tag-list/tag-list.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { NewQuestionComponent } from './pages/new-question/new-question.component';
+import { TagService } from './shared/service/tag.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { NewQuestionComponent } from './pages/new-question/new-question.componen
     HttpClientJsonpModule
   ],
   providers: [
-    UserService
+    UserService,
+    TagService
   ],
   bootstrap: [AppComponent]
 })
