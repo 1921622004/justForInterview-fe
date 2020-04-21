@@ -31,7 +31,7 @@ export class TagService {
   public getTagsByParentCode(tagCode: string) {
     const parentTag = this.tags.find((tag) => tag.tagCode === tagCode);
     if (parentTag && parentTag.children && parentTag.children.length > 0) return;
-    this.http.get<IResponseBody<ITagModel[]>>(`/api/children/${tagCode}`).subscribe((result) => {
+    this.http.get<IResponseBody<ITagModel[]>>(`/api/tag/children/${tagCode}`).subscribe((result) => {
       if (result && result.success) {
         parentTag.children = result.data;
       } else {

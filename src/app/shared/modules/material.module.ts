@@ -7,6 +7,8 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatIconModule, MatIconRegistry } from "@angular/material/icon";
+import { DomSanitizer } from '@angular/platform-browser';
 
 @NgModule({
   imports: [
@@ -17,7 +19,8 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatTabsModule,
     MatCardModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule
   ],
   exports: [
     MatChipsModule,
@@ -27,7 +30,15 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatTabsModule,
     MatCardModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule
   ]
 })
-export class MaterialModule { }
+export class MaterialModule {
+  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+    iconRegistry.addSvgIcon('done', sanitizer.bypassSecurityTrustResourceUrl('assets/done.svg'))
+      .addSvgIcon('clear', sanitizer.bypassSecurityTrustResourceUrl('assets/clear.svg'))
+      .addSvgIcon('add', sanitizer.bypassSecurityTrustResourceUrl('assets/add.svg'))
+      .addSvgIcon('account', sanitizer.bypassSecurityTrustResourceUrl('assets/account.svg'))
+  }
+}

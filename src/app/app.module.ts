@@ -15,7 +15,7 @@ import { SharedModule } from './shared/share.module';
 import { LoginComponent } from './pages/login/login.component';
 import { TagListComponent } from './pages/tag-list/tag-list.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { NewQuestionComponent } from './pages/new-question/new-question.component';
+import { NewQuestionComponent, TagDialogComponent } from './pages/new-question/new-question.component';
 import { TagService } from './shared/service/tag.service';
 
 @NgModule({
@@ -26,7 +26,8 @@ import { TagService } from './shared/service/tag.service';
     LoginComponent,
     TagListComponent,
     RegisterComponent,
-    NewQuestionComponent
+    NewQuestionComponent,
+    TagDialogComponent
   ],
   imports: [
     SharedModule,
