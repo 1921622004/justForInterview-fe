@@ -1,12 +1,12 @@
 <h1 mat-dialog-title>选择标签</h1>
 <div mat-dialog-content>
-  <mat-tab-group (selectedIndexChange)="tabChangeHandler($event)">
+  <mat-tab-group (selectedIndexChange)="tabChangeHandler($event)" [selectedIndex]="selectedIndex">
     <mat-tab *ngFor="let tag of tags" [label]="tag.tagName">
       <ng-template matTabContent>
         <mat-chip-list>
           <mat-chip *ngFor="let item of tag.children" (click)="tagChoseHandler(item.tagCode)">
             {{item.tagName}}
-            <mat-icon *ngIf="item.tagCode === chosedTag" svgIcon="done"></mat-icon>
+            <mat-icon *ngIf="chosedTags.includes(item.tagCode)" svgIcon="done"></mat-icon>
           </mat-chip>
         </mat-chip-list>
       </ng-template>
@@ -14,7 +14,10 @@
   </mat-tab-group>
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button color="primary" *ngIf="chosedTag" [mat-dialog-close]="chosedTag">确定</button>
-  <button mat-raised-button color="primary" *ngIf="!chosedTag">确定</button>
+  <button mat-raised-button color="primary" *ngIf="chosedTags.length > 0"
+    [mat-dialog-close]="[tags[selectedIndex].tagCode, chosedTags]">
+    确定
+  </button>
+  <button mat-raised-button color="primary" *ngIf="!chosedTags.length">确定</button>
   <button mat-raised-button [mat-dialog-close]>取消</button>
 </div>

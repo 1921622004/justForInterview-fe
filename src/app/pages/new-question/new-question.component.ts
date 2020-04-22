@@ -9,7 +9,7 @@ import { IResponseBody } from 'src/app/shared/interfaces/http';
 import { Router } from '@angular/router';
 
 interface TagDialogData {
-  chosedTag: string;
+  chosedTag: string[];
 }
 
 @Component({
@@ -29,7 +29,7 @@ export class NewQuestionComponent implements OnInit {
     rawContent: ['']
   })
 
-  private chosedTag = '';
+  private chosedTag = [];
 
   constructor(
     private fb: FormBuilder,
@@ -87,10 +87,11 @@ export class NewQuestionComponent implements OnInit {
           this.snackBar.open('请先选择一个标签', null, { verticalPosition: 'top', duration: 2000 });
           return
         }
+        const [parentTagCode, chosedTags] = result;
         const title = this.questionForm.get('title').value;
         const content = this.questionForm.get('content').value;
         const rawContent = this.questionForm.get('rawContent').value;
-        this.http.post<IResponseBody<number>>('/api/question/create', { title, content, rawContent, tagCode: result }).subscribe((result) => {
+        this.http.post<IResponseBody<number>>('/api/question/create', { title, content, rawContent, parentTagCode, tagCodes: chosedTags.join(',') }).subscribe((result) => {
           if (result && result.success) {
             tagDialogRef.close();
             this.snackBar.open('提交成功了', null, { verticalPosition: 'top', duration: 2000 });
@@ -110,13 +111,14 @@ export class NewQuestionComponent implements OnInit {
   templateUrl: './tag-dialog.html'
 })
 export class TagDialogComponent {
-  public chosedTag: string;
+  public chosedTags: string[];
+  public selectedIndex = 0;
 
   constructor(
     private tagService: TagService,
     @Inject(MAT_DIALOG_DATA) public data: TagDialogData
   ) {
-    this.chosedTag = data.chosedTag;
+    this.chosedTags = data.chosedTag;
   }
 
   get tags(): ITagModel[] {
@@ -124,10 +126,16 @@ export class TagDialogComponent {
   }
 
   public tabChangeHandler(index: number): void {
+    this.chosedTags = [];
+    this.selectedIndex = index;
     this.tagService.getTagsByParentCode(this.tagService.tags[index].tagCode);
   }
 
   tagChoseHandler(tagCode: string) {
-    this.chosedTag = tagCode;
+    if (this.chosedTags.includes(tagCode)) {
+      this.chosedTags = this.chosedTags.filter((item) => item !== tagCode);
+    } else {
+      this.chosedTags = this.chosedTags.concat(tagCode);
+    }
   }
 }
